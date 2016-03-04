@@ -56,37 +56,84 @@ context "attributes" do
     it "imports the 1st entry" do
       book.import_from_csv("entries.csv")
       entry_one = book.entries[0]
-      check_entry(entry_one, "Anne", "555-999-8888", "anne@funmail.com")
-
-      
+      check_entry(entry_one, "Anne", "555-999-8888", "anne@funmail.com") 
     end
 
     it "imports the 2nd entry" do
       book.import_from_csv("entries.csv")
       entry_two = book.entries[1]
-      check_entry(entry_two, "Betty", "555-999-7777", "Betty@funmail.com")
+      check_entry(entry_two, "Betty", "555-999-7777", "betty@funmail.com")
     end
  
     it "imports the 3rd entry" do
       book.import_from_csv("entries.csv")
       entry_three = book.entries[2]
-      check_entry(entry_three, "Charlene", "555-999-6666", "Charlene@funmail.com")
+      check_entry(entry_three, "Charlene", "555-999-6666", "charlene@funmail.com")
     end
  
     it "imports the 4th entry" do
       book.import_from_csv("entries.csv")
       entry_four = book.entries[3]
-      check_entry(entry_four, "Debbie", "555-999-5555", "Debbie@funmail.com")
+      check_entry(entry_four, "Debbie", "555-999-5555", "debbie@funmail.com")
      end
  
      it "imports the 5th entry" do
        book.import_from_csv("entries.csv")
        entry_five = book.entries[4]
-       check_entry(entry_five, "Ellen", "555-999-4444", "Ellen@funmail.com")
+       check_entry(entry_five, "Ellen", "555-999-4444", "ellen@funmail.com")
      end
-
- 
    end
 
+ context "#binary_search" do
+     it "searches AddressBook for a non-existent entry" do
+       book.import_from_csv("entries.csv")
+       entry = book.binary_search("Emily")
+       expect(entry).to be_nil
+     end
+   end
+
+    it "searches AddressBook for Anne" do
+       book.import_from_csv("entries.csv")
+       entry = book.binary_search("Anne")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Anne", "555-999-8888", "anne@funmail.com")
+     end
+
+    it "searches AddressBook for Betty" do
+       book.import_from_csv("entries.csv")
+       entry = book.binary_search("Betty")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Betty", "555-999-7777", "betty@funmail.com")
+     end 
+    
+ 
+     it "searches AddressBook for Charlene" do
+       book.import_from_csv("entries.csv")
+       entry = book.binary_search("Charlene")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Charlene", "555-999-6666", "charlene@funmail.com")
+     end    
+    
+ 
+     it "searches AddressBook for Debbie" do
+       book.import_from_csv("entries.csv")
+       entry = book.binary_search("Debbie")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Debbie", "555-999-5555", "debbie@funmail.com")
+     end   
+ 
+     it "searches AddressBook for Ellen" do
+       book.import_from_csv("entries.csv")
+       entry = book.binary_search("Ellen")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Ellen", "555-999-4444", "ellen@funmail.com")
+     end 
+
+      it "searches AddressBook for Debby" do
+       book.import_from_csv("entries.csv")
+       entry = book.binary_search("Debby")
+       expect(entry).to be_nil
+     end    
+    
 
  end
